@@ -10,9 +10,27 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/slider": "^4.5.7",
+    "@react-native-documents/picker": "^10.1.3",
+    "@react-native/new-app-screen": "0.80.1",
+    "@react-navigation/native": "^7.1.14",
+    "@react-navigation/native-stack": "^7.3.21",
+    "@simform_solutions/react-native-audio-waveform": "^2.1.5",
     "react": "19.1.0",
     "react-native": "0.80.1",
-    "@react-native/new-app-screen": "0.80.1"
+    "react-native-cn-quill": "^0.7.20",
+    "react-native-htmlview": "^0.17.0",
+    "react-native-pell-rich-editor": "^1.9.0",
+    "react-native-safe-area-context": "^5.5.1",
+    "react-native-screens": "^4.11.1",
+    "react-native-sound": "^0.11.2",
+    "react-native-sound-player": "^0.14.5",
+    "react-native-video": "^6.16.0",
+    "react-native-video-player": "^0.16.3",
+    "react-native-webview": "^13.15.0"
+  },
+  "overrides": {
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
