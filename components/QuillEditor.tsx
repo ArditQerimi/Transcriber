@@ -1,21 +1,29 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, StatusBar, Platform } from 'react-native';
+import { SafeAreaView, StyleSheet, Platform, View } from 'react-native';
 import QuillEditor, { QuillToolbar } from 'react-native-cn-quill';
-export default function QuillEditorComponent() {
+
+interface QuillEditorComponentProps {
+  initialValue?: string; // Prop to receive initial content from parent
+  onTextChange?: (html: string) => void; // Prop to pass content to parent
+}
+
+export default function QuillEditorComponent({ initialValue, onTextChange }: QuillEditorComponentProps) {
   const _editor = React.createRef<QuillEditor>() as React.RefObject<QuillEditor>;
 
   return (
     <SafeAreaView style={styles.root}>
-      <StatusBar barStyle="dark-content" />
+      <QuillToolbar editor={_editor as React.RefObject<QuillEditor>} options="full" theme="light" />
       <QuillEditor
         style={styles.editor}
+      
         ref={_editor}
-        initialHtml="<h1>Quill Editor for react-native</h1>"
+        initialHtml={initialValue || '<h1>Quill Editor for react-native</h1>'} // Use initialValue or fallback
         webview={{
-            dataDetectorTypes: Platform.OS === 'ios' ? 'none' : ['none']
+          dataDetectorTypes: Platform.OS === 'ios' ? 'none' : ['none'],
         }}
+        onTextChange={(data) => onTextChange?.(data.html)} // Pass only the HTML string to parent
+        // autoSize={true}
       />
-      <QuillToolbar editor={_editor as React.RefObject<QuillEditor>} options="full" theme="light" />
     </SafeAreaView>
   );
 }
@@ -27,17 +35,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   root: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    flex: 1, 
     backgroundColor: '#eaeaea',
   },
   editor: {
-    flex: 1,
     padding: 0,
     borderColor: 'gray',
     borderWidth: 1,
-    marginHorizontal: 30,
     marginVertical: 5,
     backgroundColor: 'white',
+    flex: 1,
   },
 });
